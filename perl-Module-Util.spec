@@ -4,7 +4,7 @@
 #
 Name     : perl-Module-Util
 Version  : 1.09
-Release  : 5
+Release  : 6
 URL      : https://cpan.metacpan.org/authors/id/M/MA/MATTLAW/Module-Util-1.09.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MA/MATTLAW/Module-Util-1.09.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libm/libmodule-util-perl/libmodule-util-perl_1.09-3.debian.tar.xz
