@@ -4,11 +4,11 @@
 #
 Name     : perl-Module-Util
 Version  : 1.09
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/M/MA/MATTLAW/Module-Util-1.09.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MA/MATTLAW/Module-Util-1.09.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libm/libmodule-util-perl/libmodule-util-perl_1.09-3.debian.tar.xz
-Summary  : 'Module name tools and transformations'
+Summary  : Module name tools and transformations
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Module-Util-bin = %{version}-%{release}
@@ -26,7 +26,6 @@ use Module::Util qw( :all );
 Summary: bin components for the perl-Module-Util package.
 Group: Binaries
 Requires: perl-Module-Util-license = %{version}-%{release}
-Requires: perl-Module-Util-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-Module-Util package.
@@ -37,6 +36,7 @@ Summary: dev components for the perl-Module-Util package.
 Group: Development
 Requires: perl-Module-Util-bin = %{version}-%{release}
 Provides: perl-Module-Util-devel = %{version}-%{release}
+Requires: perl-Module-Util = %{version}-%{release}
 
 %description dev
 dev components for the perl-Module-Util package.
@@ -63,7 +63,7 @@ man components for the perl-Module-Util package.
 cd ..
 %setup -q -T -D -n Module-Util-1.09 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Module-Util-1.09/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Module-Util-1.09/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
