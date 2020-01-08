@@ -8,12 +8,13 @@ Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/M/MA/MATTLAW/Module-Util-1.09.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MA/MATTLAW/Module-Util-1.09.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libm/libmodule-util-perl/libmodule-util-perl_1.09-3.debian.tar.xz
-Summary  : Module name tools and transformations
+Summary  : 'Module name tools and transformations'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Module-Util-bin = %{version}-%{release}
 Requires: perl-Module-Util-license = %{version}-%{release}
 Requires: perl-Module-Util-man = %{version}-%{release}
+Requires: perl-Module-Util-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -58,18 +59,28 @@ Group: Default
 man components for the perl-Module-Util package.
 
 
+%package perl
+Summary: perl components for the perl-Module-Util package.
+Group: Default
+Requires: perl-Module-Util = %{version}-%{release}
+
+%description perl
+perl components for the perl-Module-Util package.
+
+
 %prep
 %setup -q -n Module-Util-1.09
-cd ..
-%setup -q -T -D -n Module-Util-1.09 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libmodule-util-perl_1.09-3.debian.tar.xz
+cd %{_builddir}/Module-Util-1.09
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Module-Util-1.09/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/Module-Util-1.09/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -79,7 +90,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -88,7 +99,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Module-Util
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Module-Util/deblicense_copyright
+cp %{_builddir}/Module-Util-1.09/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Module-Util/a3120e34917d2de1330edbde17f70714d66df81c
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -101,7 +112,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Module/Util.pm
 
 %files bin
 %defattr(-,root,root,-)
@@ -113,8 +123,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Module-Util/deblicense_copyright
+/usr/share/package-licenses/perl-Module-Util/a3120e34917d2de1330edbde17f70714d66df81c
 
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/pm_which.1
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Module/Util.pm
