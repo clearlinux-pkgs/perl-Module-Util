@@ -4,7 +4,7 @@
 #
 Name     : perl-Module-Util
 Version  : 1.09
-Release  : 14
+Release  : 15
 URL      : https://cpan.metacpan.org/authors/id/M/MA/MATTLAW/Module-Util-1.09.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MA/MATTLAW/Module-Util-1.09.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libm/libmodule-util-perl/libmodule-util-perl_1.09-3.debian.tar.xz
@@ -99,7 +99,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Module-Util
-cp %{_builddir}/Module-Util-1.09/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Module-Util/a3120e34917d2de1330edbde17f70714d66df81c
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-Module-Util/a3120e34917d2de1330edbde17f70714d66df81c
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -131,4 +131,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Module/Util.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Module/Util.pm
